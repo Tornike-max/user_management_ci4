@@ -10,7 +10,7 @@ class Home extends BaseController
     {
         $model = model(User::class);
 
-        $users = $model->paginate(10);
+        $users = $model->paginate(5);
 
         $data = [
             'users' => $users,

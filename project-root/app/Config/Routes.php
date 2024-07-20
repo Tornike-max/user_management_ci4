@@ -8,5 +8,10 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->get('/users/create', 'UserController::create');
-$routes->get('/users/edit/(:segment)', 'UserController::create/$1');
+$routes->get('/users/edit/(:segment)', 'UserController::edit/$1');
+$routes->post('/users/update/(:segment)', 'UserController::update/$1');
+
+$routes->delete('/users/delete/(:segment)', 'UserController::destroy/$1');
+
+
 $routes->post('/users/store', 'UserController::store');

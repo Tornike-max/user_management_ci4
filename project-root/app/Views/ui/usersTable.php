@@ -20,9 +20,10 @@
                 <td><?= $user['fullname'] ?></td>
                 <td><?= $user['email'] ?></td>
                 <td class="d-flex justify-content-center align-items-center">
-                    <a href="<?= base_url('/') ?>" class="btn btn-success">Edit</a>
-                    <form method="post" action="#">
+                    <a href="<?= base_url('/users/edit/' . $user['id']) ?>" class="btn btn-success">Edit</a>
+                    <form method="post" action="<?= base_url('/users/delete/' . $user['id'])  ?>">
                         <?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>

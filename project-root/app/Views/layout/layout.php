@@ -26,6 +26,7 @@ switch ($uri) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
         .row.content {
@@ -74,6 +75,9 @@ switch ($uri) {
                     'title' => $title
                 ]) ?>
 
+                <?php if (session()->has('success') || session()->has('error')) : ?>
+                    <?= $this->include('ui/flashMessage') ?>
+                <?php endif; ?>
 
                 <?= $this->renderSection('content') ?>
             </div>
@@ -84,6 +88,19 @@ switch ($uri) {
         <p>Footer Text</p>
     </footer>
 
+    <script>
+        $(document).ready(() => {
+            $("#delete-alert-success-btn").click(() => {
+                console.log('clicked')
+                $('#success-alert').hide(100)
+            });
+
+            $("#delete-alert-error-btn").click(() => {
+                console.log('clicked')
+                $('#error-alert').hide(100)
+            });
+        });
+    </script>
 </body>
 
 </html>
