@@ -59,23 +59,34 @@ class UserController extends BaseController
     public function update(string $id)
     {
         helper('form');
-        $data = $this->request->getPost(['fullname', 'email']);
+        $data = $this->request->getPost(['fullname', 'email', 'avatar']);
 
         if (!$this->validateData($data, [
             'fullname' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'avatar' => 'permit_empty|is_image[avatar]'
         ])) {
             return redirect()->to('/users/edit/' . $id)->withInput()->with('error', 'Error while creating user');
         }
 
         $validatedData = $this->validator->getValidated();
 
-        if ($validatedData) {
-            $model = model(User::class);
+        $file = $this->request->getFile('avatar');
 
-            $model->update($id, $validatedData);
-            return redirect()->to('/')->with('success', 'User Updated Successfully');
+        if (is_uploaded_file($file) && !empty($file)) {
+            $filename = $file->getName();
+            $nameArray = explode('.', $filename);
+            $filePath = time() . '.' . end($nameArray);
+            if ($file->move('images', $filePath)) {
+                $validatedData['avatar'] = $filePath;
+            }
         }
+
+
+        $model = model(User::class);
+
+        $model->update($id, $validatedData);
+        return redirect()->to('/')->with('success', 'User Updated Successfully');
     }
 
     public function destroy(string $id)

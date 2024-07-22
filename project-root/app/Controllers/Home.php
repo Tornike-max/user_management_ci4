@@ -10,6 +10,10 @@ class Home extends BaseController
     {
         $model = model(User::class);
 
+        if ($this->request->getGet('val')) {
+            $model = $model->like('fullname', $this->request->getGet('val'));
+        }
+
         $users = $model->paginate(5);
 
         $data = [

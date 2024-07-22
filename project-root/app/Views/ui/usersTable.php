@@ -7,6 +7,7 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Avatar</th>
             <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">actions</th>
@@ -17,6 +18,9 @@
         <?php foreach ($users as $user) : ?>
             <tr>
                 <th scope="row"><?= $user['id'] ?></th>
+                <th>
+                    <img style="width: 50px;" src="<?= ($user['avatar'] ? '/images/' . $user['avatar'] : 'https://placehold.co/600x400?font=roboto') ?>" />
+                </th>
                 <td><?= $user['fullname'] ?></td>
                 <td><?= $user['email'] ?></td>
                 <td class="d-flex justify-content-center align-items-center">
