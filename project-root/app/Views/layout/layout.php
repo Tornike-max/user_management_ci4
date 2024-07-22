@@ -18,6 +18,8 @@ switch ($uri) {
         break;
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -68,11 +70,12 @@ switch ($uri) {
 
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-3 sidenav">
+            <div id="sidebar" class="col-sm-3 sidenav block">
                 <?= $this->include('layout/inc/sidebar') ?>
                 <br>
                 <?= $this->include('layout/inc/search') ?>
             </div>
+            <button id="toggle-btn" class="btn btn-primary">Sidebar</button>
 
             <div class="col-sm-9">
                 <?= view('layout/inc/title', [
@@ -88,12 +91,12 @@ switch ($uri) {
         </div>
     </div>
 
-    <footer class="container-fluid">
-        <p>Footer Text</p>
-    </footer>
+
 
     <script>
         $(document).ready(() => {
+            let isOpen = false;
+
             $("#delete-alert-success-btn").click(() => {
                 console.log('clicked')
                 $('#success-alert').hide(100)
@@ -103,6 +106,19 @@ switch ($uri) {
                 console.log('clicked')
                 $('#error-alert').hide(100)
             });
+
+
+            const toggleSidebar = () => {
+                if (isOpen) {
+                    $('#sidebar').hide(200);
+                } else {
+                    $('#sidebar').show(200);
+                }
+                isOpen = !isOpen;
+            }
+
+            $('#toggle-btn').click(toggleSidebar);
+
         });
     </script>
 </body>
