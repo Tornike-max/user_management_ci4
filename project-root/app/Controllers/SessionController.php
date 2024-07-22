@@ -44,14 +44,16 @@ class SessionController extends BaseController
 
         $validatedData = $this->validator->getValidated();
         $usersModel = model(User::class)->getUser($validatedData['email']);
-        // echo '<pre>';
-        // var_dump($validatedData['password']);
-        // echo '</pre>';
-        // exit;
 
         if (password_verify($validatedData['password'], $usersModel['password'])) {
             session()->set('loggedInUser', $usersModel['id']);
             return redirect()->to(base_url('/'))->with('success', 'User logged in successfully');;
         };
+    }
+
+    public function destroy()
+    {
+        session()->destroy();
+        return redirect()->to(base_url('/users/login'))->with('success', 'User logged out successfully');;
     }
 }
