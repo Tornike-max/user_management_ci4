@@ -15,3 +15,5 @@ $routes->delete('/users/delete/(:segment)', 'UserController::destroy/$1');
 
 
 $routes->post('/users/store', 'UserController::store');
+$routes->get('/users/login', 'SessionController::index');
+$routes->post('/users/login/store', 'SessionController::store');

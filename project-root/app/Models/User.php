@@ -43,4 +43,10 @@ class User extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    public function getUser($email)
+    {
+        return $this->where('email', $email)->first();
+    }
 }

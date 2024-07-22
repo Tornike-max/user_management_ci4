@@ -9,6 +9,10 @@ switch ($uri) {
     case 'users/create':
         $title = 'Create User';
         break;
+
+    case 'users/login':
+        $title = 'Login';
+        break;
     default:
         $title = 'Dashboard';
         break;
